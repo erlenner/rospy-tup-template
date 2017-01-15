@@ -1,0 +1,10 @@
+ROS_PACKAGE_NAME = demo
+ROS_GEN_PY = $(TUP_CWD)/external/ros_gen_py
+TOP = $(TUP_CWD)
+
+# Generate python classes from ros messages
+!msg = |> ^co MSG %f^ $(ROS_GEN_PY)/genmsg_py.py -p $(ROS_PACKAGE_NAME) -o . %f |> _%B.py
+
+!linkbin = |> ^co LINKBIN %f^ ln -sf $(TOP)/../src/%d/%f %o |> %B
+
+!linkmsg = |> ^co LINKMSG %f^ ln -sf %f %o |> %g.py
