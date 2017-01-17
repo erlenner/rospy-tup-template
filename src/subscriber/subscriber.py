@@ -9,7 +9,7 @@ def callback(coords):
 def listener():
   rospy.init_node('subscriber', anonymous=True)
   
-  rospy.Subscriber('python-ros-demo-pub', Coords, callback)
+  rospy.Subscriber('python_ros_demo_pub', Coords, callback)
   rospy.spin()
 
 if __name__ == '__main__':

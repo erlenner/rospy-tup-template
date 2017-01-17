@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 import rospy
-from ros.msg._Coords import Coords
+from Coords import Coords
 
 def talker():
-    pub = rospy.Publisher('python-ros-demo-pub', Coords)
+    pub = rospy.Publisher('python_ros_demo_pub', Coords)
     rospy.init_node('publisher', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     coords = Coords()
