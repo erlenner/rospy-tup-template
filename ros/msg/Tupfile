@@ -1,3 +1,2 @@
 include_rules
-export PYTHONPATH
 : foreach *.msg |> !msg |>

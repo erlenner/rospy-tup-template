@@ -2,11 +2,14 @@ ROS_PACKAGE_NAME = demo
 ROS_GEN_PY = $(TUP_CWD)/external/ros_gen_py
 TOP = $(TUP_CWD)
 
+export PYTHONPATH
+
 # Generate python classes from ros messages
-!msg = |> ^co MSG %f^ $(ROS_GEN_PY)/genmsg_py.py -p $(ROS_PACKAGE_NAME) -o . %f |> _%B.py
+!msg = |> ^c MSG %f^ $(ROS_GEN_PY)/genmsg_py.py -p $(ROS_PACKAGE_NAME) -o . %f |> _%B.py
 
-#!linkbin = |> ^co LINKBIN %f^ ln -sf $(TOP)/../src/%d/%f %o |> %B
+# Generate python classes from ros services
+!srv = |> ^c SRV %f^ $(ROS_GEN_PY)/gensrv_py.py -p $(ROS_PACKAGE_NAME) -o . %f |> _%B.py
 
-!linkmsg = |> ^co LINKMSG %f^ ln -sf %f %o |> %g.py
+!link = |> ^c LINK %f^ ln -sf %f %o |> %g.py
 
-!bin = |> ^co BIN %o^ cp $(ROS_GEN_PY)/bin_template.sh %o; chmod +x %o |> %B
+!bin = |> ^c BIN %o^ cp $(ROS_GEN_PY)/bin_template.sh %o; chmod +x %o |> %B
