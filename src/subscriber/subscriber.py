@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
-from Coords import Coords
+from demo.Coords import Coords
 
 def callback(coords):
   rospy.loginfo("Received: %f, %f, %f", coords.latitude, coords.longitude, coords.altitude)

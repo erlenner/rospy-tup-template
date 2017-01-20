@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
-from Coords import Coords
+from demo.Coords import Coords
 
 def talker():
     pub = rospy.Publisher('python_ros_demo_pub', Coords)

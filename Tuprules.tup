@@ -10,6 +10,7 @@ export PYTHONPATH
 # Generate python classes from ros services
 !srv = |> ^c SRV %f^ $(ROS_GEN_PY)/gensrv_py.py -p $(ROS_PACKAGE_NAME) -o . %f |> _%B.py
 
-!link = |> ^c LINK %f^ ln -sf %f %o |> %g.py
+!link = |> ^c LINK %f^ mkdir -p $(ROS_PACKAGE_NAME); ln -sf ../%f %o |> $(ROS_PACKAGE_NAME)/%g.py
+!init = |> ^c INIT %o^ touch %o |> $(ROS_PACKAGE_NAME)/__init__.py
 
 !bin = |> ^c BIN %o^ cp $(ROS_GEN_PY)/bin_template.sh %o; chmod +x %o |> %B
