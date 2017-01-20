@@ -5,12 +5,12 @@ TOP = $(TUP_CWD)
 export PYTHONPATH
 
 # Generate python classes from ros messages
-!msg = |> ^c MSG %f^ $(ROS_GEN_PY)/genmsg_py.py -p $(ROS_PACKAGE_NAME) -o . %f |> _%B.py
+!msg = |> ^c MSG %f^ $(ROS_GEN_PY)/genmsg_py.py -p $(ROS_PACKAGE_NAME) -o . %f; mv _%B.py %B.py |> %B.py
 
 # Generate python classes from ros services
-!srv = |> ^c SRV %f^ $(ROS_GEN_PY)/gensrv_py.py -p $(ROS_PACKAGE_NAME) -o . %f |> _%B.py
+!srv = |> ^c SRV %f^ $(ROS_GEN_PY)/gensrv_py.py -p $(ROS_PACKAGE_NAME) -o . %f; mv _%B.py %B.py |> %B.py
 
-!link = |> ^c LINK %f^ mkdir -p $(ROS_PACKAGE_NAME); ln -sf ../%f %o |> $(ROS_PACKAGE_NAME)/%g.py
+!link = |> ^c LINK %f^ mkdir -p $(ROS_PACKAGE_NAME); ln -sf ../%f %o |> $(ROS_PACKAGE_NAME)/%b
 !init = |> ^c INIT %o^ touch %o |> $(ROS_PACKAGE_NAME)/__init__.py
 
 !bin = |> ^c BIN %o^ cp $(ROS_GEN_PY)/bin_template.sh %o; chmod +x %o |> %B

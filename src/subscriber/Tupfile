@@ -1,4 +1,4 @@
 include_rules
+: foreach $(TOP)/ros/msg/*.py $(TOP)/ros/*.py |> !link |>
 : foreach *.py |> !bin |>
-: foreach $(TOP)/ros/msg/_*.py $(TOP)/ros/srv/_*.py |> !link |>
 : |> !init |>
