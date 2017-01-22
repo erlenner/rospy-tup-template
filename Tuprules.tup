@@ -1,3 +1,4 @@
+PYTHON_INTERPRETER = python2.7
 ROS_PACKAGE_NAME = pub_sub_demo
 
 TOP = $(TUP_CWD)
@@ -17,5 +18,5 @@ export PYTHONPATH
 !link = |> ^c LINK %f^ mkdir -p $(ROS_PACKAGE_NAME); ln -sf ../%f %o |> $(ROS_PACKAGE_NAME)/%b
 !init = |> ^c INIT %o^ touch %o |> $(ROS_PACKAGE_NAME)/__init__.py
 
-# Make shell script to call the original pythonscript with the classes for messages/services included into PYTHONPATH
-!bin = |> ^c BIN %o^ cp $(ROS_GEN_PY)/bin_template.sh %o; chmod +x %o |> %d
+# Make shell script to call the original pythonscript with the classes for messages/services included into PYTHONPATH. (The output files from this rule are more readable)
+!bin = |> ^c BIN %o^ echo '#!/bin/sh\nDIR=\$(dirname \$(realpath "$0"))\nPYTHONPATH=$PYTHONPATH:`find $DIR -type d -printf ":%%p"` $(PYTHON_INTERPRETER) $DIR/../../../src/\$(basename "$DIR")/main.py "$@"' > %o; chmod +x %o |> %d
