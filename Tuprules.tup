@@ -16,4 +16,4 @@ ROS_GEN_PY = $(TOP)/external/ros_gen_py
 !init = |> ^c INIT %o^ touch %o |> $(ROS_PACKAGE_NAME)/__init__.py
 
 # Make shell script to call the original pythonscript with the classes for messages/services included into PYTHONPATH. (The output files from this rule are more readable)
-!bin = |> ^c BIN %o^ echo '#!/bin/sh\nDIR=\$(dirname \$(realpath "$0"))\nPYTHONPATH=$PYTHONPATH:`find $DIR -type d -printf ":%%p"` $(PYTHON_INTERPRETER) $DIR/../../../src/\$(basename "$DIR")/main.py "$@"' > %o; chmod +x %o |> %d
+!bin = |> ^c BIN %o^ echo '#!/bin/sh\nDIR=\$(dirname \$(realpath "$0"))\nPYTHONPATH=$PYTHONPATH:$DIR:\$(realpath $DIR/$(TOP)/../external/modules) $(PYTHON_INTERPRETER) $DIR/../../../src/\$(basename "$DIR")/main.py "$@"' > %o; chmod +x %o |> %d
