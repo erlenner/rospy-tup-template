@@ -14,9 +14,11 @@ To build, run "tup" from the command line.
 
 The building process generates python code for the messages and services in ros/msg and ros/srv and makes a shell script that makes the python message/service code accessible from your python scripts in the source folders by including its path in PYTHONPATH before calling the sources main.py script. This means you only have to run tup after you have changed the ROS message or service files, or after you have changed the directory structure in src/ by creating, deleting or renaming source directories. You don't need to run tup if you have only made changes to the source code (the python scripts in the folders in src/). This includes file creation/deletion/renaming. Just make sure there is a main.cpp file in each source directory that calls all your code.
 
+To automatically build on file change and see building log messages in current shell, run "tup monitor -f -a --autoparse".
+
 ### Running
 Outputs have the same directory path and name as the source directory, starting from build-native/.
-(For example the output binary from the source directory, src/publisher/ have the path build-native/src/publisher/publisher.)
+(For example the output shell script from the source directory, src/publisher/ have the path build-native/src/publisher/publisher.)
 
 Run the command "roscore" to run the "ROS Master" that the rosnodes need to register with in order to communicate with each other.
 
