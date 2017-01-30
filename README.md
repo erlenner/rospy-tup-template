@@ -37,6 +37,8 @@ The building process generates python code for the messages and services in ros/
 
 To automatically build on file change and see building log messages in current shell, run "tup monitor -f -a --autoparse".
 
+To generate a picture showing the dependency relations of your project run "tup graph --stickies . | dot -Tpng > name-of-dependency-graph.png".
+
 ### Running
 Outputs have the same directory path and name as the source directory, starting from build-native/.
 (For example the output shell script from the source directory, src/publisher/ have the path build-native/src/publisher/publisher.)
@@ -44,4 +46,4 @@ Outputs have the same directory path and name as the source directory, starting 
 Run the command "roscore" to run the "ROS Master" that the rosnodes need to register with in order to communicate with each other.
 
 ### Editing source
-Source files are located in separate directories in src/.
+Source files are located in separate directories in src/. The only extra-ordinary requirement for source files is that each directory in src/ is supposed to have a main.py file where the main loop runs.
