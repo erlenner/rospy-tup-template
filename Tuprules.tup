@@ -1,18 +1,18 @@
 PYTHON_INTERPRETER = python2.7
 ROS_PACKAGE_NAME = pub_sub_demo
+ROSDIR = ros
 
 TOP = $(TUP_CWD)
 ROS_GEN_PY = $(TOP)/external/ros_gen_py
 
-
 # Generate python classes from ros messages
-!msg = |> ^c MSG %f^ PYTHONPATH=/opt/ros/kinetic/lib/python2.7/dist-packages $(ROS_GEN_PY)/genmsg_py.py -p $(ROS_PACKAGE_NAME) -o . %f; mv _%B.py %B.py |> %B.py
+!msg = |> ^c MSG %f^ PYTHONPATH=/opt/ros/kinetic/lib/python2.7/dist-packages $(ROS_GEN_PY)/genmsg_py.py -p $(ROS_PACKAGE_NAME) -o . %f; mv _%B.py r%B.py |> r%B.py
 
 # Generate python classes from ros services
-!srv = |> ^c SRV %f^ PYTHONPATH=/opt/ros/kinetic/lib/python2.7/dist-packages $(ROS_GEN_PY)/gensrv_py.py -p $(ROS_PACKAGE_NAME) -o . %f; mv _%B.py %B.py |> %B.py
+!srv = |> ^c SRV %f^ PYTHONPATH=/opt/ros/kinetic/lib/python2.7/dist-packages $(ROS_GEN_PY)/gensrv_py.py -p $(ROS_PACKAGE_NAME) -o . %f; mv _%B.py r%B.py |> r%B.py
 
 # Make sure python classes for messages/services are includable with "from <ROS_PACKAGE_NAME>.<MSG/SRV NAME> import <MSG/SRV NAME>"
-!link = |> ^c LINK %f^ ln -sf ../%f %o |> $(ROS_PACKAGE_NAME)/%b
+!link = |> ^c LINK %f^ ln -sf ../%f %o |> $(ROS_PACKAGE_NAME)/%g.py
 !init = |> ^c INIT %o^ touch %o |> $(ROS_PACKAGE_NAME)/__init__.py
 
 # Make shell script to call the original pythonscript with the classes for messages/services included into PYTHONPATH. (The output files from this rule are more readable)
