@@ -3,7 +3,7 @@
 This template implements the basic publish and subscribe rosnodes, using a custom message located in ros/msg/.
 
 ### Prerequisites:
-Install [ROS Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+Install [ROS](http://wiki.ros.org/kinetic/Installation/Ubuntu).
 
 To install tup, run `scripts/getTup.sh`.
 
@@ -30,4 +30,4 @@ Message and service files are located in [ros/msg/](ros/msg) and [ros/srv/](ros/
 The ROS version and package name of the project, as well as the python interpreter are specified in [Tuprules.tup](Tuprules.tup).
 
 ### ROS commands
-In order to run ROS commands that needs to know the path to the built ROS messages and services of your project you first need to run `source scripts/registerRosMsgSrv.sh`
+In order to run ROS commands that needs to know the path to the built ROS messages and services of your project you first need to run `source scripts/registerRosMsgSrv.sh`. For example the command `rostopic echo /pos_publisher` will fail before you do this.
